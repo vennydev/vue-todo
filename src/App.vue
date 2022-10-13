@@ -1,28 +1,37 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <header class="">
+      <h1>todos</h1>
+    </header>
+    <section class="todo-main">
+      <input type="text" />
+      <ul class="todo-list">
+        <li class="todo">study</li>
+        <li class="todo">work</li>
+        <li class="todo">exercise</li>
+      </ul>
+      <footer>
+        <p>2 items left</p>
+        <ul class="sort-button">
+          <li><button>All</button></li>
+          <li><button>Active</button></li>
+          <li><button>Completed</button></li>
+        </ul>
+      </footer>
+    </section>
+    <footer>
+      <p>
+        Made by <a href="https://github.com/vennydev/vue-todo">Venny Lee</a>
+      </p>
+    </footer>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  components: {},
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
