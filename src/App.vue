@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <input type="text" @keydown="addTodo" v-model="todo" />
+    <todo-input v-on:submit="addTodo"></todo-input>
+    <todo-list></todo-list>
+    <todo-footer></todo-footer>
     <table>
       <thead>
         <tr>
@@ -40,39 +42,21 @@
 </template>
 
 <script>
+import TodoInput from "./components/TodoInput.vue";
+import TodoList from "./components/TodoList.vue";
+import TodoFooter from "./components/TodoFooter.vue";
+
 export default {
   name: "app",
-  components: {},
+  components: {
+    TodoInput,
+    TodoList,
+    TodoFooter,
+  },
   data: function () {
     return {
-      todo: "",
       newTodo: "",
-      todoList: [
-        {
-          id: 1,
-          todo: "talk with friends",
-          isCompleted: false,
-          isEdited: false,
-        },
-        {
-          id: 2,
-          todo: "go to gym",
-          isCompleted: false,
-          isEdited: false,
-        },
-        {
-          id: 3,
-          todo: "drink water",
-          isCompleted: false,
-          isEdited: false,
-        },
-        {
-          id: 4,
-          todo: "studt vue",
-          isCompleted: false,
-          isEdited: false,
-        },
-      ],
+      todoList: [],
     };
   },
   methods: {
@@ -82,24 +66,6 @@ export default {
       } else {
         this.todoList[index].isCompleted = false;
       }
-    },
-    addTodo: function (e) {
-      if (e.keyCode !== 13) return;
-      let length = this.todoList.length;
-      const newObj = {
-        // id 중복 에러!!
-        // id: this.todoList.length + 1,
-        // 무조건 마지막 todo의 id 값에 + 1을 해준다
-        // 즉, 새로 생성하는 id가 배열의 length 를 기준으로 만들어지는지, 마지막 id를 기준으로 만들어지는지가 다르다.
-        id: this.todoList[length - 1].id + 1,
-        todo: this.todo,
-        isCompleted: false,
-      };
-      this.todoList.push(newObj);
-      console.log("this.todoList: ", this.todoList);
-      console.log("length: ", length);
-      console.log("id + 1: ", this.todoList[length - 1].id + 1);
-      this.todo = "";
     },
     deleteTodo: function (index) {
       // let fileteredList = this.todoList.filter((item) => item.id !== id);
@@ -115,6 +81,15 @@ export default {
       this.todoList[index].todo = this.newTodo;
       this.handleEdit(index);
       this.newTodo = "";
+    },
+    addTodo: function (todo) {
+      console.log("todo: ", todo);
+      let newObj = {
+        id: this.todoList.length + 1,
+        todo: todo,
+        isCompleted: false,
+      };
+      this.todoList.push(newObj);
     },
   },
 };
